@@ -7,13 +7,13 @@
 <meta http-equiv="Content-Language" content="en">
 <meta name="theme-color" content="#f6efe7">
 <meta property="og:title" content="Rowenna Draw">
-<meta property="og:description" content="Illustration, characters and illustrated goods.">
+<meta property="og:description" content="Illustrations, characters, cards, phone cases and LINE stickers by Rowenna Draw, Taiwan.">
 <meta property="og:image" content="img/og.jpg">
 <link rel="icon" href="img/favicon.png" type="image/png">
 <link rel="preload" href="img/logo.webp" as="image">
 <style>html{color-scheme:light}:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Rowenna Draw</title>
-<meta name="description" content="Rowenna Draw — illustration, characters and illustrated goods.">
+<meta name="description" content="Rowenna Draw is an illustrator and designer in Taiwan. Illustrations, characters, cards, phone cases and LINE stickers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
@@ -86,11 +86,13 @@ a:hover .arrow{transform:translateX(4px)}
 @media (min-width:900px){.shead{grid-template-columns:minmax(0,1fr) minmax(0,22rem);align-items:end}}
 
 /* chapters */
-.chapter{padding-block:clamp(64px,12vh,130px)}
-.ch-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:14px 24px;padding-bottom:22px;margin-bottom:clamp(22px,3vw,36px);border-bottom:1px solid var(--line)}
+.chapter{padding-block:clamp(44px,8vh,88px)}
+.ch-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:10px 24px;padding-bottom:14px;margin-bottom:clamp(16px,2.4vw,26px);border-bottom:1px solid var(--line)}
 .ch-head .tag{grid-column:1 / -1}
-.ch-title{margin:0;font-family:var(--title);font-weight:600;font-size:clamp(2.6rem,7.6vw,7rem);line-height:1;letter-spacing:0}
-.ch-side{display:flex;align-items:center;gap:18px}
+.ch-title{margin:0;font-family:var(--title);font-weight:600;font-size:clamp(1.55rem,3.2vw,2.5rem);line-height:1.1;letter-spacing:.01em}
+.ch-side{display:flex;align-items:center;gap:14px}
+.ch-side .pill{padding:7px 14px;font-size:11px;letter-spacing:.14em}
+.ch-side .tag{font-size:11px}
 @media (max-width:699px){.ch-head{grid-template-columns:minmax(0,1fr)}.ch-side{justify-content:space-between}}
 
 /* identical mats */
@@ -113,9 +115,12 @@ a:hover .arrow{transform:translateX(4px)}
 .rv.in{opacity:1;transform:none}
 
 /* services */
-.make{padding-block:clamp(80px,14vh,150px) 0}
-.chips{display:flex;flex-wrap:wrap;gap:12px;padding-top:8px}
-.chips span{border:1px solid var(--line);border-radius:999px;padding:14px 24px;font-family:var(--title);font-weight:600;font-size:clamp(1.05rem,1.8vw,1.35rem);letter-spacing:.02em;background:transparent}
+.make{padding-block:clamp(56px,9vh,96px) 0}
+.make .shead{padding-block:0 18px;gap:10px}
+.make .shead h2{font-size:clamp(1.3rem,2.4vw,1.8rem);line-height:1.15}
+.make .shead p{font-size:13px;line-height:1.7;max-width:30em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding-top:4px}
+.chips span{border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-family:var(--text);font-weight:500;font-size:12.5px;letter-spacing:.08em;background:transparent}
 
 /* contact card */
 .contact{padding-block:clamp(80px,14vh,150px) clamp(40px,8vh,80px)}
@@ -261,13 +266,14 @@ function bottom(){
     <div>
       <span class="tag soft">Contact</span>
       <h2>Have a drawing<br>in mind?</h2>
-      <p>Illustration, characters, cards and stickers. Send a message with what you are picturing and we can take it from there.</p>
+      <p>Illustrations, characters, cards and stickers. Tell me what you have in mind and we'll work out the rest together.</p>
       <div class="btns">
-        <a class="pill fill" href="https://www.instagram.com/rowenna.draw/" target="_blank" rel="noopener">Instagram</a>
-        <a class="pill" href="https://line.me/ti/p/zDHl9vUM7s" target="_blank" rel="noopener">LINE</a>
+        <a class="pill fill" href="mailto:rowenna.draw@gmail.com">Email me</a>
+        <a class="pill" href="https://www.instagram.com/rowenna.draw/" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
     <dl class="tag">
+      <dt class="soft">Email</dt><dd><a href="mailto:rowenna.draw@gmail.com" style="text-transform:none;letter-spacing:.04em">rowenna.draw@gmail.com</a></dd>
       <dt class="soft">Instagram</dt><dd>@rowenna.draw</dd>
       <dt class="soft">Based in</dt><dd>Taiwan</dd>
       <dt class="soft">Status</dt><dd>Open for commissions</dd>
@@ -301,11 +307,11 @@ function homeView(){
   </div>
 </section>
 <div class="wrap" id="work" data-tone="paper">
-  <div class="shead"><h2>Selected Work</h2><p class="soft">Each series keeps its own colour. Scroll through, then step inside the one you like.</p></div>
+  <div class="shead"><h2>Selected Work</h2><p class="soft">Six series, each with its own color. Scroll through, then open the one that catches your eye.</p></div>
 </div>
 ${chapters}
 <section class="make wrap" id="make" data-tone="paper">
-  <div class="shead" style="padding-top:0"><h2>What I make</h2><p class="soft">Open for illustration commissions and collaborations, from a single drawing to a whole character.</p></div>
+  <div class="shead" style="padding-top:0"><h2>What I make</h2><p class="soft">Open to commissions and collaborations, from a single illustration to a full character.</p></div>
   <div class="chips rv"><span>Illustration</span><span>Character Design</span><span>Cards</span><span>Phone Cases</span><span>LINE Stickers</span></div>
 </section>
 ${bottom()}`;
