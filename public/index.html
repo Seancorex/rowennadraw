@@ -222,6 +222,10 @@ a:hover .arrow{transform:translateX(4px)}
 .bubble{position:absolute;z-index:50;left:0;top:0;transform:translate(-50%,0);background:#fff;color:#22344a;border:1.5px solid currentColor;border-radius:16px;padding:7px 13px;font-size:13px;line-height:1.35;font-weight:500;letter-spacing:.02em;white-space:nowrap;pointer-events:none}
 .bubble::after{content:"";position:absolute;left:var(--tx,50%);top:100%;width:9px;height:9px;background:#fff;border:solid currentColor;border-width:0 1.5px 1.5px 0;transform:translate(-50%,-50%) rotate(45deg)}
 .g-all{margin-top:8px}
+.meet{padding-block:clamp(72px,12vh,130px) 0}
+.meet-in{display:grid;gap:8px;justify-items:center;text-align:center}
+.meet-in p{margin:0;max-width:30em}
+.meet .stage{margin-top:clamp(40px,6vh,64px);margin-bottom:0}
 
 /* bu-lu spotlight */
 .spot{position:fixed;inset:0;z-index:90;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;gap:8px;padding:max(16px,env(safe-area-inset-top,0px)) var(--gr) max(14px,env(safe-area-inset-bottom,0px)) var(--gl);isolation:isolate}
@@ -289,8 +293,8 @@ a:hover .arrow{transform:translateX(4px)}
 
 <script>
 const SERIES=[
- {slug:'vivid-life',name:'Vivid Life',tone:{bg:'#f1e4bf',fg:'#3a3426',mat:'#f9f2dd'},pick:['food-07','food-04','food-01','food-06'],items:['food-01','food-02','food-03','food-04','food-05','food-06','food-07','food-08']},
  {slug:'bu-lu',name:'Bu-Lu',tone:{bg:'#dce7f1',fg:'#22344a',mat:'#f1f5f9'},pick:['bulu-03','bulu-06','bulu-10','bulu-14'],items:Array.from({length:15},(_,i)=>'bulu-'+String(i+1).padStart(2,'0'))},
+ {slug:'vivid-life',name:'Vivid Life',tone:{bg:'#f1e4bf',fg:'#3a3426',mat:'#f9f2dd'},pick:['food-07','food-04','food-01','food-06'],items:['food-01','food-02','food-03','food-04','food-05','food-06','food-07','food-08']},
  {slug:'lines',name:'Lines',tone:{bg:'#e5e3dd',fg:'#2b2b2b',mat:'#f4f2ee'},pick:['traveler-09','traveler-11','traveler-05','traveler-07'],items:['traveler-01','traveler-05','traveler-06','traveler-07','traveler-08','traveler-09','traveler-10','traveler-11','traveler-12']},
  {slug:'color-stories',name:'Color Stories',tone:{bg:'#eedccb',fg:'#3d2b22',mat:'#f8eee5'},pick:['drawing-01','drawing-02','drawing-03'],items:['drawing-01','drawing-02','drawing-03']},
  {slug:'illustration-stories',name:'Illustration Stories',tone:{bg:'#ecdad7',fg:'#3d2d2d',mat:'#f8efed'},pick:['drawing-16','traveler-03','traveler-04'],items:['drawing-04','drawing-16','drawing-17','traveler-03','traveler-04']},
@@ -315,20 +319,20 @@ const BULU=Object.keys(CUT);
 /* ---------- bu-lu gang ---------- */
 const GANG={
  'bulu-01':{name:'Tangles',about:'Sat down to knit a scarf. The cat had a different project in mind. Nobody knows where the yarn ends now, and honestly, nobody is asking.',good:['Untangling things (eventually)','Being sat on'],say:'Has anyone seen the end of this?'},
- 'bulu-02':{name:'Fizz',about:'Has been standing at the fridge for a while. Water is the sensible choice, soda is the fun one, so Fizz is holding both. Just in case.',good:['Keeping options open','Never being thirsty'],say:'Water… or soda?'},
- 'bulu-03':{name:'Bloom',about:'Picks flowers on the way to everywhere, so every trip takes twice as long. Always shows up late, but with half a garden in a basket.',good:['Smelling nice','Making people stop and look'],say:'These are for you. And you.'},
- 'bulu-04':{name:'Sprout',about:'Carries one small plant everywhere and talks to it more than to most people. The plant is doing great, thanks for asking.',good:['Patience','Remembering to water things'],say:'Say hi, she’s a little shy.'},
- 'bulu-05':{name:'Chef',about:'Hat on, spatula up, with chicken, steak and fish all ready to go. The only question is which one hits the grill first.',good:['Feeding everyone twice','Smelling like dinner'],say:'Dinner in five. Maybe ten.'},
+ 'bulu-02':{name:'Fizz',about:'Has been standing at the fridge for ages. Water is the sensible choice and soda is the fun one, so Fizz is holding both, just in case.',good:['Keeping options open','Never being thirsty'],say:'Water… or soda?'},
+ 'bulu-03':{name:'Bloom',about:'Stops to pick flowers on the way to anywhere, so every trip takes twice as long. Always shows up late, but with half a garden in a basket.',good:['Smelling nice','Making people stop and look'],say:'These are for you. And you.'},
+ 'bulu-04':{name:'Sprout',about:'Carries one small plant everywhere and talks to it more than to most people. The plant is doing great, thanks for asking.',good:['Being patient','Remembering to water things'],say:'Say hi, she’s a little shy.'},
+ 'bulu-05':{name:'Chef',about:'Hat on, spatula up, with chicken, steak and fish all ready to go. The only question is which one hits the grill first.',good:['Making sure nobody leaves hungry','Smelling like dinner'],say:'Dinner in five. Maybe ten.'},
  'bulu-06':{name:'Bounce',about:'Found a beach ball and hasn’t put it down since. Can’t sit still, can’t stop grinning, and will absolutely bounce it off your head.',good:['Starting games','Tiring everyone out'],say:'Catch!'},
- 'bulu-07':{name:'Zest',about:'Very serious about lemons. Brings a sword to slice them and a spare slice in case the first one runs out. Nobody has ever asked why.',good:['Making lemonade dramatic','Keeping a straight face'],say:'One slice or two?'},
- 'bulu-08':{name:'Haul',about:'Went fishing and came home with an octopus, two squid and, somehow, a basketball. Still unclear who caught whom.',good:['Bringing home surprises','Getting tangled up'],say:'They followed me home.'},
- 'bulu-09':{name:'Volt',about:'Found a free charger and has been glowing about it ever since. Fully charged, a little too energetic, still holding the plug just in case.',good:['Staying up late','Finding the outlet in any room'],say:'100% and climbing!'},
- 'bulu-10':{name:'Crumb',about:'Went in for one slice of cake and walked out with the croissants, the cookies and every strawberry they had. Shares. Eventually.',good:['Finding the best bakery in town','Dessert first'],say:'There’s always room for one more.'},
+ 'bulu-07':{name:'Zest',about:'Very serious about lemons. Carries a sword to slice them, plus a spare slice for emergencies. Nobody has ever asked why.',good:['Making lemonade look dramatic','Keeping a straight face'],say:'One slice or two?'},
+ 'bulu-08':{name:'Haul',about:'Went fishing and came home with an octopus, two squid and, somehow, a basketball. It’s still unclear who caught whom.',good:['Bringing home surprises','Getting tangled up'],say:'They followed me home.'},
+ 'bulu-09':{name:'Volt',about:'Found a free charger and has been glowing about it ever since. Fully charged, a little too energetic, and still holding on to the plug, just in case.',good:['Staying up late','Finding the outlet in any room'],say:'100% and climbing!'},
+ 'bulu-10':{name:'Crumb',about:'Went in for one slice of cake and walked out with the croissants, the cookies and every strawberry they had. Shares. Eventually.',good:['Finding the best bakery in town','Eating dessert first'],say:'There’s always room for one more.'},
  'bulu-11':{name:'Champ',about:'Wins at everything, including things that aren’t competitions. Carries the flag, the trophy and something to play the victory song on.',good:['Celebrating loudly','Turning chores into races'],say:'I won! What were we doing?'},
- 'bulu-12':{name:'Fetch',about:'Took the dog out for a walk. The dog found a log, then a bone. Now Fetch is carrying all three home, and the dog looks very pleased.',good:['Saying yes to the dog','Long walks'],say:'He’s a good boy. Mostly.'},
- 'bulu-13':{name:'Snooze',about:'Brings a pillow everywhere, because you never know. The nightcap stays on all day, and wake-up time is more of a suggestion.',good:['Napping anywhere','Missing alarms'],say:'Five more minutes…'},
+ 'bulu-12':{name:'Fetch',about:'Took the dog out for a walk. The dog found a log, then a bone. Now Fetch is carrying all three home, and the dog looks very pleased.',good:['Saying yes to the dog','Going on long walks'],say:'He’s a good boy. Mostly.'},
+ 'bulu-13':{name:'Snooze',about:'Brings a pillow everywhere, because you never know. The nightcap stays on all day, and wake-up time is more of a suggestion.',good:['Napping anywhere','Sleeping through alarms'],say:'Five more minutes…'},
  'bulu-14':{name:'Parcel',about:'Remembers every birthday, plus a few that aren’t real. Always turns up with a stack of boxes and never says what’s inside.',good:['Wrapping things perfectly','Keeping secrets'],say:'Don’t shake it!'},
- 'bulu-15':{name:'Errand',about:'Holds the shopping list like an ancient scroll. Nothing gets crossed off without a little ceremony, and somehow there are always snacks that weren’t on it.',good:['Remembering the milk','Checking twice'],say:'Eggs, bread… cake?'}
+ 'bulu-15':{name:'Errand',about:'Treats the shopping list like an ancient scroll. Nothing gets crossed off without a little ceremony, and somehow there are always snacks that weren’t on it.',good:['Remembering the milk','Checking everything twice'],say:'Eggs, bread… cake?'}
 };
 /* rows from the back to the front; wide characters stand at the back so nobody gets hidden */
 const GANG_ROWS={
@@ -367,7 +371,7 @@ function bottom(){
     <div>
       <span class="tag soft">Contact</span>
       <h2>Have a drawing<br>in mind?</h2>
-      <p>Illustrations, characters, cards and stickers. Tell me what you have in mind and we'll work out the rest together.</p>
+      <p>Illustrations, characters, cards and stickers. Tell me what you’re picturing and we’ll work out the rest together.</p>
       <div class="btns">
         <a class="pill fill" href="mailto:rowenna.draw@gmail.com">Email me</a>
         <a class="pill" href="https://www.instagram.com/rowenna.draw/" target="_blank" rel="noopener">Instagram</a>
@@ -407,7 +411,11 @@ function homeView(){
     <h1>Rowenna Draw</h1>
   </div>
 </section>
-<div class="wrap" id="work" data-tone="paper">
+<section class="meet wrap" id="meet" data-tone="0" aria-label="Meet Bu-Lu">
+  <div class="meet-in"><span class="tag soft">Meet Bu-Lu</span><p class="soft">Fifteen little blue friends, each hugging the thing they love most. Pick one to say hi.</p></div>
+  ${gangStage(bySlug['bu-lu'])}
+</section>
+<div class="wrap" id="work" data-tone="0">
   <div class="shead"><h2>Selected Work</h2><p class="soft">Six series, each with its own color. Scroll through, then open the one that catches your eye.</p></div>
 </div>
 ${chapters}
@@ -422,19 +430,22 @@ function tabs(s){return `<nav class="tabs" aria-label="Series">${SERIES.map(x=>`
 
 function buluView(s){
   const k=SERIES.indexOf(s),next=SERIES[(k+1)%6];
-  const D=gangPos(GANG_ROWS.d),M=gangPos(GANG_ROWS.m);
-  const crowd=s.items.map((n,i)=>{const d=D[n],m=M[n],[w,h]=CUT[n],g=GANG[n];
-    return `<button class="bu" type="button" data-n="${n}" aria-label="Say hi to ${g.name}" style="--ar:${(w/h).toFixed(3)};--x:${d.x}%;--b:${d.b}%;--h:${d.h}%;--z:${d.z};--xm:${m.x}%;--bm:${m.b}%;--hm:${m.h}%;--zm:${m.z};--d:${(2.6+((i*37)%13)/10).toFixed(2)}s;--dl:-${((i*53)%30)/10}s"><span class="mv"><span class="ln"><span class="sw"><img src="img/cut/${n}.webp" width="${w}" height="${h}" alt="" draggable="false" decoding="async"></span></span></span><span class="nm">${g.name}</span></button>`}).join('');
   return `
 <div class="page wrap">
   <div class="s-top"><a class="pill back" href="#work">← Back</a>${tabs(s)}</div>
-  <header class="s-head"><span class="tag soft kicker">Series</span><h1>${s.name}</h1><span class="tag soft">${pad(s.items.length)} friends</span><p class="g-lead soft">Fifteen little blue friends, each hugging the thing they love most. Tap one to say hi.</p></header>
-  <div class="gang"><div class="stage" id="stage"><div class="floor"></div>${crowd}</div></div>
+  <header class="s-head"><span class="tag soft kicker">Series</span><h1>${s.name}</h1><span class="tag soft">${pad(s.items.length)} friends</span><p class="g-lead soft">Fifteen little blue friends, each hugging the thing they love most. Pick one to say hi.</p></header>
+  ${gangStage(s)}
   <div class="ch-head g-all"><h2 class="ch-title">All the drawings</h2><div class="ch-side"><span class="tag soft">${pad(s.items.length)} works</span></div></div>
   <div class="tiles s-grid">${s.items.map((n,j)=>tile(s,n,{sizes:'(max-width:899px) 46vw, 31vw',delay:(j%3)*90})).join('')}</div>
   <a class="next" href="#${next.slug}"><span class="tag soft">Next series</span><b>${next.name} <span class="arrow">→</span></b></a>
 </div>
 ${bottom()}`;
+}
+function gangStage(s){
+  const D=gangPos(GANG_ROWS.d),M=gangPos(GANG_ROWS.m);
+  const crowd=s.items.map((n,i)=>{const d=D[n],m=M[n],[w,h]=CUT[n],g=GANG[n];
+    return `<button class="bu" type="button" data-n="${n}" aria-label="Say hi to ${g.name}" style="--ar:${(w/h).toFixed(3)};--x:${d.x}%;--b:${d.b}%;--h:${d.h}%;--z:${d.z};--xm:${m.x}%;--bm:${m.b}%;--hm:${m.h}%;--zm:${m.z};--d:${(2.6+((i*37)%13)/10).toFixed(2)}s;--dl:-${((i*53)%30)/10}s"><span class="mv"><span class="ln"><span class="sw"><img src="img/cut/${n}.webp" width="${w}" height="${h}" alt="" draggable="false" decoding="async"></span></span></span><span class="nm">${g.name}</span></button>`}).join('');
+  return `<div class="gang"><div class="stage" id="stage"><div class="floor"></div>${crowd}</div></div>`;
 }
 
 function seriesView(s){
@@ -489,7 +500,7 @@ function render(first){
     setTone(r.t==='home'?PAPER:r.s.tone);
     document.title=r.t==='home'?'Rowenna Draw':r.t==='series'?`${r.s.name} — Rowenna Draw`:`${r.s.name} ${pad(r.i+1)} — Rowenna Draw`;
     if(!sameSeriesCase)window.scrollTo(0,0);
-    if(r.t==='home'){mountTrail();mountTones();if(r.anchor)requestAnimationFrame(()=>scrollToAnchor(r.anchor,true))}
+    if(r.t==='home'){mountTrail();mountTones();mountGang();if(r.anchor)requestAnimationFrame(()=>scrollToAnchor(r.anchor,true))}
     if(r.t==='case')mountCase();
     if(r.t==='series'&&r.s.slug==='bu-lu')mountGang();
     mountReveal();onScroll();
