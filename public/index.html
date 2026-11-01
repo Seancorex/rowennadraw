@@ -198,6 +198,77 @@ a:hover .arrow{transform:translateX(4px)}
 .lb img{max-width:100%;max-height:100%;object-fit:contain}
 .lb button{position:absolute;top:max(14px,env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));background:none;border:0;font:500 12px/1 var(--text);letter-spacing:.16em;color:#33312e;padding:12px;cursor:pointer}
 
+/* bu-lu gang: everyone standing together */
+.gang{margin-inline:calc(-1 * var(--gl)) calc(-1 * var(--gr));padding-inline:var(--gl) var(--gr);overflow-x:clip}
+.s-head .g-lead{grid-column:1 / -1;margin:6px 0 0;max-width:32em}
+.stage{position:relative;width:min(100%,calc(72svh * 2.1));aspect-ratio:21/10;margin:clamp(56px,9vh,96px) auto clamp(56px,9vh,96px);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+@media (max-width:699px){.stage{width:100%;aspect-ratio:4/5;margin-top:56px}}
+.stage .floor{position:absolute;left:0;right:0;bottom:-4%;height:70%;pointer-events:none;background:radial-gradient(ellipse 50% 46% at 50% 64%,color-mix(in srgb,#fff 50%,transparent),transparent 72%)}
+.bu{--ar:.8;position:absolute;left:var(--x);bottom:var(--b);height:var(--h);aspect-ratio:var(--ar);transform:translateX(-50%);z-index:var(--z);padding:0;border:0;background:none;cursor:pointer;color:inherit;font:inherit}
+@media (max-width:699px){.bu{left:var(--xm);bottom:var(--bm);height:var(--hm);z-index:var(--zm)}}
+.bu::before{content:"";position:absolute;left:16%;right:16%;bottom:-3%;height:7%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--fg) 24%,transparent),transparent)}
+.bu .mv,.bu .ln,.sw,.hp{position:absolute;inset:0}
+.bu .ln{transform:rotate(var(--lean,0deg));transform-origin:50% 100%;transition:transform .7s var(--ease)}
+.sw{transform-origin:50% 100%;animation:breathe var(--d,3.2s) ease-in-out var(--dl,0s) infinite}
+.sw img{width:100%;height:100%;object-fit:contain;-webkit-user-drag:none;pointer-events:none}
+@keyframes breathe{0%,100%{transform:rotate(-1.1deg) scale(1,1)}50%{transform:rotate(1.1deg) scale(1.018,.978)}}
+.bu .nm{position:absolute;left:50%;bottom:100%;transform:translate(-50%,8px);opacity:0;white-space:nowrap;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;line-height:1;background:var(--fg);color:var(--bg);border-radius:999px;padding:6px 11px;pointer-events:none;transition:opacity .25s,transform .4s var(--ease)}
+.bu:hover,.bu:focus-visible{z-index:40}
+.bu:hover .nm,.bu:focus-visible .nm{opacity:1;transform:translate(-50%,-6px)}
+.bu:focus-visible{outline:none}
+.bu:focus-visible::before{background:radial-gradient(closest-side,color-mix(in srgb,var(--fg) 45%,transparent),transparent)}
+.bu.away{visibility:hidden}
+@media (hover:none){.bu .nm{display:none}}
+.bubble{position:absolute;z-index:50;left:0;top:0;transform:translate(-50%,0);background:#fff;color:#22344a;border:1.5px solid currentColor;border-radius:16px;padding:7px 13px;font-size:13px;line-height:1.35;font-weight:500;letter-spacing:.02em;white-space:nowrap;pointer-events:none}
+.bubble::after{content:"";position:absolute;left:var(--tx,50%);top:100%;width:9px;height:9px;background:#fff;border:solid currentColor;border-width:0 1.5px 1.5px 0;transform:translate(-50%,-50%) rotate(45deg)}
+.g-all{margin-top:8px}
+.meet{padding-block:clamp(72px,12vh,130px) 0}
+.meet-in{display:grid;gap:8px;justify-items:center;text-align:center}
+.meet-in p{margin:0;max-width:30em}
+.meet .stage{margin-top:clamp(40px,6vh,64px);margin-bottom:0}
+
+/* bu-lu spotlight */
+.spot{position:fixed;inset:0;z-index:90;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;gap:8px;padding:max(16px,env(safe-area-inset-top,0px)) var(--gr) max(14px,env(safe-area-inset-bottom,0px)) var(--gl);isolation:isolate}
+.spot::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--bg);opacity:0;transition:opacity .4s var(--ease)}
+.spot.on::before{opacity:1}
+.sp-bar,.sp-foot{opacity:0;transition:opacity .4s var(--ease) .15s}
+.spot.on .sp-bar,.spot.on .sp-foot{opacity:1}
+.sp-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:6px}
+.sp-close{background:none;color:inherit;font-family:var(--text);cursor:pointer;padding:8px 16px 8px 14px;font-size:11.5px}
+.sp-main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,88px);min-height:0;touch-action:pan-y}
+.sp-fig{position:relative;display:flex;align-items:center;justify-content:center;min-height:0;height:100%}
+.bx{position:relative;width:min(100%,calc(min(62svh,600px) * var(--ar)));aspect-ratio:var(--ar);transform-origin:0 0;cursor:pointer}
+.bx .sw{animation-duration:2.6s}
+.bx .bubble{z-index:3}
+.sp-txt{max-width:30em}
+.sp-txt>*{opacity:0;transform:translateY(14px);transition:opacity .45s var(--ease),transform .55s var(--ease)}
+.sp-txt.show>*{opacity:1;transform:none}
+.sp-txt.show>:nth-child(2){transition-delay:.05s}.sp-txt.show>:nth-child(3){transition-delay:.1s}.sp-txt.show>:nth-child(4){transition-delay:.15s}.sp-txt.show>:nth-child(5){transition-delay:.2s}
+.sp-name{margin:6px 0 16px;font-family:var(--title);font-weight:600;font-size:clamp(2.6rem,6.4vw,5.6rem);line-height:1;letter-spacing:.01em}
+.sp-about{margin:0 0 22px}
+.sp-good{display:grid;gap:8px;margin-bottom:26px}
+.sp-good .chips span{background:color-mix(in srgb,var(--mat) 70%,transparent)}
+.sp-foot{display:flex;align-items:center;gap:10px}
+.sp-dots{display:flex;gap:4px;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none;padding:10px 4px 2px}
+.sp-dots::-webkit-scrollbar{display:none}
+@media (min-width:900px){.sp-dots{justify-content:center}}
+.sp-dots button{flex:0 0 auto;width:46px;height:52px;border:0;background:none;padding:0;cursor:pointer;opacity:.42;transition:opacity .3s,transform .4s var(--ease)}
+.sp-dots button:hover{opacity:.8}
+.sp-dots button[aria-current="true"]{opacity:1;transform:translateY(-7px)}
+.sp-dots img{width:100%;height:100%;object-fit:contain;pointer-events:none}
+.rbtn{flex:0 0 auto;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0;transition:border-color .3s}
+.rbtn:hover{border-color:var(--fg)}
+.rbtn svg{width:18px;height:18px}
+@media (max-width:699px){
+  .sp-main{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);align-items:start;gap:14px;overflow-y:auto;overscroll-behavior:contain}
+  .sp-fig{height:auto;padding-top:46px}
+  .bx{width:min(64vw,calc(34svh * var(--ar)))}
+  .sp-name{font-size:clamp(2.4rem,12vw,3.4rem);margin-bottom:10px}
+  .sp-about{font-size:14px;line-height:1.75;margin-bottom:16px}
+  .sp-good{margin-bottom:18px}
+  .sp-dots button{width:40px;height:46px}
+}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.01ms !important;animation:none !important}
   .rv{opacity:1;transform:none}
@@ -222,8 +293,8 @@ a:hover .arrow{transform:translateX(4px)}
 
 <script>
 const SERIES=[
- {slug:'vivid-life',name:'Vivid Life',tone:{bg:'#f1e4bf',fg:'#3a3426',mat:'#f9f2dd'},pick:['food-07','food-04','food-01','food-06'],items:['food-01','food-02','food-03','food-04','food-05','food-06','food-07','food-08']},
  {slug:'bu-lu',name:'Bu-Lu',tone:{bg:'#dce7f1',fg:'#22344a',mat:'#f1f5f9'},pick:['bulu-03','bulu-06','bulu-10','bulu-14'],items:Array.from({length:15},(_,i)=>'bulu-'+String(i+1).padStart(2,'0'))},
+ {slug:'vivid-life',name:'Vivid Life',tone:{bg:'#f1e4bf',fg:'#3a3426',mat:'#f9f2dd'},pick:['food-07','food-04','food-01','food-06'],items:['food-01','food-02','food-03','food-04','food-05','food-06','food-07','food-08']},
  {slug:'lines',name:'Lines',tone:{bg:'#e5e3dd',fg:'#2b2b2b',mat:'#f4f2ee'},pick:['traveler-09','traveler-11','traveler-05','traveler-07'],items:['traveler-01','traveler-05','traveler-06','traveler-07','traveler-08','traveler-09','traveler-10','traveler-11','traveler-12']},
  {slug:'color-stories',name:'Color Stories',tone:{bg:'#eedccb',fg:'#3d2b22',mat:'#f8eee5'},pick:['drawing-01','drawing-02','drawing-03'],items:['drawing-01','drawing-02','drawing-03']},
  {slug:'illustration-stories',name:'Illustration Stories',tone:{bg:'#ecdad7',fg:'#3d2d2d',mat:'#f8efed'},pick:['drawing-16','traveler-03','traveler-04'],items:['drawing-04','drawing-16','drawing-17','traveler-03','traveler-04']},
@@ -244,6 +315,40 @@ const $=(q,el=document)=>el.querySelector(q);
 const $$=(q,el=document)=>[...el.querySelectorAll(q)];
 const caseId=(s,i)=>`${s.slug}-${pad(i+1)}`;
 const BULU=Object.keys(CUT);
+
+/* ---------- bu-lu gang ---------- */
+const GANG={
+ 'bulu-01':{name:'Tangles',about:'Sat down to knit a scarf. The cat had a different project in mind. Nobody knows where the yarn ends now, and honestly, nobody is asking.',good:['Untangling things (eventually)','Being sat on'],say:'Has anyone seen the end of this?'},
+ 'bulu-02':{name:'Fizz',about:'Has been standing at the fridge for ages. Water is the sensible choice and soda is the fun one, so Fizz is holding both, just in case.',good:['Keeping options open','Never being thirsty'],say:'Water… or soda?'},
+ 'bulu-03':{name:'Bloom',about:'Stops to pick flowers on the way to anywhere, so every trip takes twice as long. Always shows up late, but with half a garden in a basket.',good:['Smelling nice','Making people stop and look'],say:'These are for you. And you.'},
+ 'bulu-04':{name:'Sprout',about:'Carries one small plant everywhere and talks to it more than to most people. The plant is doing great, thanks for asking.',good:['Being patient','Remembering to water things'],say:'Say hi, she’s a little shy.'},
+ 'bulu-05':{name:'Chef',about:'Hat on, spatula up, with chicken, steak and fish all ready to go. The only question is which one hits the grill first.',good:['Making sure nobody leaves hungry','Smelling like dinner'],say:'Dinner in five. Maybe ten.'},
+ 'bulu-06':{name:'Bounce',about:'Found a beach ball and hasn’t put it down since. Can’t sit still, can’t stop grinning, and will absolutely bounce it off your head.',good:['Starting games','Tiring everyone out'],say:'Catch!'},
+ 'bulu-07':{name:'Zest',about:'Very serious about lemons. Carries a sword to slice them, plus a spare slice for emergencies. Nobody has ever asked why.',good:['Making lemonade look dramatic','Keeping a straight face'],say:'One slice or two?'},
+ 'bulu-08':{name:'Haul',about:'Went fishing and came home with an octopus, two squid and, somehow, a basketball. It’s still unclear who caught whom.',good:['Bringing home surprises','Getting tangled up'],say:'They followed me home.'},
+ 'bulu-09':{name:'Volt',about:'Found a free charger and has been glowing about it ever since. Fully charged, a little too energetic, and still holding on to the plug, just in case.',good:['Staying up late','Finding the outlet in any room'],say:'100% and climbing!'},
+ 'bulu-10':{name:'Crumb',about:'Went in for one slice of cake and walked out with the croissants, the cookies and every strawberry they had. Shares. Eventually.',good:['Finding the best bakery in town','Eating dessert first'],say:'There’s always room for one more.'},
+ 'bulu-11':{name:'Champ',about:'Wins at everything, including things that aren’t competitions. Carries the flag, the trophy and something to play the victory song on.',good:['Celebrating loudly','Turning chores into races'],say:'I won! What were we doing?'},
+ 'bulu-12':{name:'Fetch',about:'Took the dog out for a walk. The dog found a log, then a bone. Now Fetch is carrying all three home, and the dog looks very pleased.',good:['Saying yes to the dog','Going on long walks'],say:'He’s a good boy. Mostly.'},
+ 'bulu-13':{name:'Snooze',about:'Brings a pillow everywhere, because you never know. The nightcap stays on all day, and wake-up time is more of a suggestion.',good:['Napping anywhere','Sleeping through alarms'],say:'Five more minutes…'},
+ 'bulu-14':{name:'Parcel',about:'Remembers every birthday, plus a few that aren’t real. Always turns up with a stack of boxes and never says what’s inside.',good:['Wrapping things perfectly','Keeping secrets'],say:'Don’t shake it!'},
+ 'bulu-15':{name:'Errand',about:'Treats the shopping list like an ancient scroll. Nothing gets crossed off without a little ceremony, and somehow there are always snacks that weren’t on it.',good:['Remembering the milk','Checking everything twice'],say:'Eggs, bread… cake?'}
+};
+/* rows from the back to the front; wide characters stand at the back so nobody gets hidden */
+const GANG_ROWS={
+ d:{rows:[['bulu-15','bulu-08','bulu-07','bulu-11'],['bulu-01','bulu-05','bulu-10','bulu-09','bulu-12'],['bulu-06','bulu-03','bulu-14','bulu-02','bulu-04','bulu-13']],
+    cfg:[{b:47,h:34,pad:19},{b:25,h:40,pad:11},{b:2,h:46,pad:8.5}]},
+ m:{rows:[['bulu-15','bulu-08','bulu-07'],['bulu-11','bulu-01','bulu-05','bulu-12'],['bulu-10','bulu-09','bulu-03','bulu-13'],['bulu-06','bulu-14','bulu-02','bulu-04']],
+    cfg:[{b:63,h:20,pad:22},{b:43,h:23,pad:14},{b:22,h:25,pad:14},{b:1,h:27,pad:14}]}
+};
+const JIT=[[.8,-1,.03],[-1.2,1.2,-.02],[.4,.3,.05],[-.6,-.8,0],[1.1,.9,-.04],[-.3,-1.3,.02],[.9,.5,-.01]];
+function gangPos({rows,cfg}){
+  const out={};
+  rows.forEach((r,ri)=>{const n=r.length,{b,h,pad}=cfg[ri];
+    r.forEach((id,j)=>{const jt=JIT[(ri*5+j*3)%JIT.length];
+      out[id]={x:+(pad+(100-2*pad)*(n===1?.5:j/(n-1))+jt[0]).toFixed(2),b:+(b+jt[1]).toFixed(2),h:+(h*(1+jt[2])).toFixed(2),z:ri*10+(j%2?2:1)}})});
+  return out;
+}
 
 function setTone(t){const r=document.documentElement.style;r.setProperty('--bg',t.bg);r.setProperty('--fg',t.fg);r.setProperty('--mat',t.mat)}
 function matImg(n,{sizes='(max-width:899px) 46vw, 24vw',alt='',lazy=true}={}){
@@ -266,7 +371,7 @@ function bottom(){
     <div>
       <span class="tag soft">Contact</span>
       <h2>Have a drawing<br>in mind?</h2>
-      <p>Illustrations, characters, cards and stickers. Tell me what you have in mind and we'll work out the rest together.</p>
+      <p>Illustrations, characters, cards and stickers. Tell me what you’re picturing and we’ll work out the rest together.</p>
       <div class="btns">
         <a class="pill fill" href="mailto:rowenna.draw@gmail.com">Email me</a>
         <a class="pill" href="https://www.instagram.com/rowenna.draw/" target="_blank" rel="noopener">Instagram</a>
@@ -294,7 +399,7 @@ function homeView(){
 <section class="chapter wrap" data-tone="${k}" aria-labelledby="t-${s.slug}">
   <div class="ch-head">
     <h3 class="ch-title" id="t-${s.slug}"><a href="#${s.slug}">${s.name}</a></h3>
-    <div class="ch-side"><span class="tag soft">${pad(s.items.length)} works</span><a class="pill" href="#${s.slug}">View series <span class="arrow">→</span></a></div>
+    <div class="ch-side"><span class="tag soft">${pad(s.items.length)} works</span><a class="pill" href="#${s.slug}">${s.slug==='bu-lu'?'Meet them':'View series'} <span class="arrow">→</span></a></div>
   </div>
   <div class="tiles${s.wide?' wide':''}" style="--n:${s.pick.length}">${s.pick.map((n,j)=>tile(s,n,{delay:j*90})).join('')}</div>
 </section>`).join('');
@@ -306,7 +411,11 @@ function homeView(){
     <h1>Rowenna Draw</h1>
   </div>
 </section>
-<div class="wrap" id="work" data-tone="paper">
+<section class="meet wrap" id="meet" data-tone="0" aria-label="Meet Bu-Lu">
+  <div class="meet-in"><span class="tag soft">Meet Bu-Lu</span><p class="soft">Fifteen little blue friends, each hugging the thing they love most. Pick one to say hi.</p></div>
+  ${gangStage(bySlug['bu-lu'])}
+</section>
+<div class="wrap" id="work" data-tone="0">
   <div class="shead"><h2>Selected Work</h2><p class="soft">Six series, each with its own color. Scroll through, then open the one that catches your eye.</p></div>
 </div>
 ${chapters}
@@ -319,7 +428,28 @@ ${bottom()}`;
 
 function tabs(s){return `<nav class="tabs" aria-label="Series">${SERIES.map(x=>`<a href="#${x.slug}" ${x===s?'aria-current="page"':''}>${x.name}</a>`).join('')}</nav>`}
 
+function buluView(s){
+  const k=SERIES.indexOf(s),next=SERIES[(k+1)%6];
+  return `
+<div class="page wrap">
+  <div class="s-top"><a class="pill back" href="#work">← Back</a>${tabs(s)}</div>
+  <header class="s-head"><span class="tag soft kicker">Series</span><h1>${s.name}</h1><span class="tag soft">${pad(s.items.length)} friends</span><p class="g-lead soft">Fifteen little blue friends, each hugging the thing they love most. Pick one to say hi.</p></header>
+  ${gangStage(s)}
+  <div class="ch-head g-all"><h2 class="ch-title">All the drawings</h2><div class="ch-side"><span class="tag soft">${pad(s.items.length)} works</span></div></div>
+  <div class="tiles s-grid">${s.items.map((n,j)=>tile(s,n,{sizes:'(max-width:899px) 46vw, 31vw',delay:(j%3)*90})).join('')}</div>
+  <a class="next" href="#${next.slug}"><span class="tag soft">Next series</span><b>${next.name} <span class="arrow">→</span></b></a>
+</div>
+${bottom()}`;
+}
+function gangStage(s){
+  const D=gangPos(GANG_ROWS.d),M=gangPos(GANG_ROWS.m);
+  const crowd=s.items.map((n,i)=>{const d=D[n],m=M[n],[w,h]=CUT[n],g=GANG[n];
+    return `<button class="bu" type="button" data-n="${n}" aria-label="Say hi to ${g.name}" style="--ar:${(w/h).toFixed(3)};--x:${d.x}%;--b:${d.b}%;--h:${d.h}%;--z:${d.z};--xm:${m.x}%;--bm:${m.b}%;--hm:${m.h}%;--zm:${m.z};--d:${(2.6+((i*37)%13)/10).toFixed(2)}s;--dl:-${((i*53)%30)/10}s"><span class="mv"><span class="ln"><span class="sw"><img src="img/cut/${n}.webp" width="${w}" height="${h}" alt="" draggable="false" decoding="async"></span></span></span><span class="nm">${g.name}</span></button>`}).join('');
+  return `<div class="gang"><div class="stage" id="stage"><div class="floor"></div>${crowd}</div></div>`;
+}
+
 function seriesView(s){
+  if(s.slug==='bu-lu')return buluView(s);
   const k=SERIES.indexOf(s),next=SERIES[(k+1)%6];
   return `
 <div class="page wrap">
@@ -370,8 +500,9 @@ function render(first){
     setTone(r.t==='home'?PAPER:r.s.tone);
     document.title=r.t==='home'?'Rowenna Draw':r.t==='series'?`${r.s.name} — Rowenna Draw`:`${r.s.name} ${pad(r.i+1)} — Rowenna Draw`;
     if(!sameSeriesCase)window.scrollTo(0,0);
-    if(r.t==='home'){mountTrail();mountTones();if(r.anchor)requestAnimationFrame(()=>scrollToAnchor(r.anchor,true))}
+    if(r.t==='home'){mountTrail();mountTones();mountGang();if(r.anchor)requestAnimationFrame(()=>scrollToAnchor(r.anchor,true))}
     if(r.t==='case')mountCase();
+    if(r.t==='series'&&r.s.slug==='bu-lu')mountGang();
     mountReveal();onScroll();
     view.classList.remove('out');
   };
@@ -456,6 +587,171 @@ function mountTrail(){
   hero.addEventListener('touchmove',e=>{const t=e.touches[0];if(t)at(t.clientX,t.clientY)},{passive:true});
   hero.addEventListener('touchstart',e=>{const t=e.touches[0];if(t){last=null;at(t.clientX,t.clientY)}},{passive:true});
   cleanup.push(()=>els.forEach(e=>e.getAnimations().forEach(a=>a.cancel())));
+}
+
+/* Bu-Lu gang: they walk in, settle, breathe, lean toward the pointer, hop when touched and chat now and then.
+   Everything moves with transform/opacity only, and the little loop sleeps while the stage is off screen. */
+function mountGang(){
+  const stage=$('#stage');if(!stage)return;
+  const ORDER=bySlug['bu-lu'].items,L=ORDER.length;
+  const bus=$$('.bu',stage),byN=Object.fromEntries(bus.map(b=>[b.dataset.n,b]));
+  const timers=[];let alive=true,visible=false,entered=false,spot=null,bubble=null;
+  const later=(f,ms)=>{const t=setTimeout(()=>{if(alive)f()},ms);timers.push(t);return t};
+  const free=el=>!el.getAnimations().some(a=>a.playState==='running');
+
+  const hop=(el,big)=>{if(reduce||!free(el))return;const y=big?-22:-12;
+    el.animate([{transform:'none'},{transform:'scale(1.06,.92)',offset:.16},{transform:`translateY(${y}%) scale(.96,1.05)`,offset:.48},{transform:'scale(1.05,.95)',offset:.8},{transform:'none'}],{duration:big?640:520,easing:'ease-out'})};
+  const wiggle=el=>{if(reduce||!free(el))return;el.style.transformOrigin='50% 100%';
+    el.animate([{transform:'none'},{transform:'rotate(-7deg)'},{transform:'rotate(6deg)'},{transform:'rotate(-4deg)'},{transform:'none'}],{duration:700,easing:'ease-in-out'})};
+  const mv=b=>$('.mv',b);
+
+  function say(host,anchor,text,ms=2300){
+    if(bubble){bubble.remove();bubble=null}
+    const el=document.createElement('div');el.className='bubble';el.textContent=text;host.appendChild(el);
+    const hr=host.getBoundingClientRect(),ar=anchor.getBoundingClientRect(),w=el.offsetWidth;
+    const cx=ar.left+ar.width/2-hr.left,min=w/2-hr.left+8,max=innerWidth-hr.left-w/2-8;
+    const x=Math.max(min,Math.min(max,cx));
+    el.style.left=x+'px';el.style.top=(ar.top-hr.top-el.offsetHeight-12)+'px';
+    el.style.setProperty('--tx',Math.max(16,Math.min(w-16,cx-x+w/2))+'px');
+    if(!reduce)el.animate([{opacity:0,transform:'translate(-50%,10px) scale(.6)'},{opacity:1,transform:'translate(-50%,0) scale(1)'}],{duration:340,easing:'cubic-bezier(.3,1.6,.5,1)'});
+    bubble=el;
+    later(()=>{if(!el.isConnected)return;const a=el.animate([{opacity:1},{opacity:0,transform:'translate(-50%,-8px)'}],{duration:260,fill:'forwards'});a.onfinish=()=>{el.remove();if(bubble===el)bubble=null}},ms);
+  }
+
+  /* walk in from the nearest side, in little steps */
+  function enter(){
+    if(entered)return;entered=true;
+    if(reduce){later(()=>say(stage,byN['bulu-06'],'Hi! We’re Bu-Lu.'),300);return}
+    const sorted=bus.map(b=>({b,r:b.getBoundingClientRect()})).sort((p,q)=>Math.abs(p.r.left+p.r.width/2-innerWidth/2)-Math.abs(q.r.left+q.r.width/2-innerWidth/2));
+    let last=0;
+    sorted.forEach(({b,r},i)=>{
+      const left=r.left+r.width/2<innerWidth/2,dx=left?-(r.right+20):innerWidth-r.left+20;
+      const steps=6,kf=[];for(let k=0;k<=steps;k++){const t=k/steps,e=1-Math.pow(1-t,2.2);kf.push({transform:`translate(${(dx*(1-e)).toFixed(1)}px,${k%2&&k<steps?-7:0}%)`,offset:t})}
+      const dur=Math.min(1500,850+Math.abs(dx)*.5),delay=120+i*55;last=Math.max(last,dur+delay);
+      mv(b).animate(kf,{duration:dur,delay,easing:'linear',fill:'backwards'});
+    });
+    later(()=>{
+      say(stage,byN['bulu-06'],'Hi! We’re Bu-Lu.',2600);
+      [...bus].sort((p,q)=>p.getBoundingClientRect().left-q.getBoundingClientRect().left).forEach((b,j)=>later(()=>hop(mv(b)),420+j*70));
+      later(loop,3600);
+    },last+150);
+  }
+
+  let tick=0;
+  function loop(){
+    later(loop,1400+Math.random()*1300);
+    if(!visible||document.hidden||spot)return;
+    const b=bus[Math.random()*L|0];if(b.matches(':hover'))return;
+    tick++;
+    if(tick%3===0)say(stage,b,GANG[b.dataset.n].say);
+    else if(Math.random()<.72)hop(mv(b));else wiggle(mv(b));
+  }
+
+  /* lean toward the pointer */
+  let centers=[],px=null,raf=0;
+  const measure=()=>{const sr=stage.getBoundingClientRect();centers=bus.map(b=>{const r=b.getBoundingClientRect();return r.left+r.width/2-sr.left})};
+  const lean=()=>{raf=0;if(!px)return;const W=stage.clientWidth;bus.forEach((b,i)=>{const a=Math.max(-7,Math.min(7,(px-centers[i])/W*24));b.style.setProperty('--lean',a.toFixed(1)+'deg')})};
+  const onMove=e=>{if(e.pointerType!=='mouse'||reduce)return;px=e.clientX-stage.getBoundingClientRect().left;if(!raf)raf=requestAnimationFrame(lean)};
+  const onLeave=()=>{px=null;bus.forEach(b=>b.style.setProperty('--lean','0deg'))};
+  stage.addEventListener('pointermove',onMove);stage.addEventListener('pointerleave',onLeave);
+  bus.forEach(b=>{
+    b.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')hop(mv(b))});
+    b.addEventListener('click',()=>openSpot(b.dataset.n));
+  });
+  measure();
+  const rs=()=>measure();addEventListener('resize',rs);
+
+  const io=('IntersectionObserver' in window)?new IntersectionObserver(es=>es.forEach(e=>{visible=e.isIntersecting;if(visible)enter()}),{threshold:.25}):null;
+  if(io)io.observe(stage);else{visible=true;enter()}
+
+  /* ---------- spotlight ---------- */
+  const chev=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="${d}"/></svg>`;
+  let idx=0,busy=false,closing=false;
+  function openSpot(n){
+    if(spot)return;
+    idx=ORDER.indexOf(n);
+    if(bubble){bubble.remove();bubble=null}
+    const el=document.createElement('div');el.className='spot';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-label','Bu-Lu');
+    el.innerHTML=`
+<div class="sp-bar"><button class="pill sp-close" type="button">← Everyone</button><span class="tag soft sp-count"></span></div>
+<div class="sp-main">
+  <div class="sp-fig"><div class="bx"><div class="hp"><div class="sw"><img alt="" draggable="false"></div></div></div></div>
+  <div class="sp-txt"><span class="tag soft sp-no"></span><h2 class="sp-name"></h2><p class="sp-about"></p><div class="sp-good"><span class="tag soft">Good at</span><div class="chips"></div></div><div><a class="pill sp-see" href="#">See the drawing <span class="arrow">→</span></a></div></div>
+</div>
+<div class="sp-foot"><button class="rbtn sp-prev" type="button" aria-label="Previous friend">${chev('M15 5l-7 7 7 7')}</button><div class="sp-dots">${ORDER.map((m,j)=>`<button type="button" data-i="${j}" aria-label="${GANG[m].name}"><img src="img/cut/${m}.webp" alt="" loading="lazy"></button>`).join('')}</div><button class="rbtn sp-next" type="button" aria-label="Next friend">${chev('M9 5l7 7-7 7')}</button></div>`;
+    spot=el;
+    const bx=$('.bx',el),hp=$('.hp',el),img=$('img',bx),txt=$('.sp-txt',el),fig=$('.sp-fig',el),dots=$$('.sp-dots button',el),dotsBox=$('.sp-dots',el);
+    const fill=k=>{
+      const m=ORDER[k],g=GANG[m],[w,h]=CUTL[m];
+      bx.style.setProperty('--ar',(w/h).toFixed(3));
+      img.width=w;img.height=h;img.src=`img/cut/${m}.webp`;img.alt=`${g.name}, Bu-Lu ${pad(k+1)}`;
+      const full=new Image();full.src=`img/cutl/${m}.webp`;(full.decode?full.decode():Promise.resolve()).then(()=>{if(ORDER[idx]===m)img.src=full.src}).catch(()=>{});
+      $('.sp-count',el).textContent=`${pad(k+1)} / ${pad(L)}`;
+      $('.sp-no',el).textContent=`No. ${pad(k+1)}`;
+      $('.sp-name',el).textContent=g.name;
+      $('.sp-about',el).textContent=g.about;
+      $('.chips',el).innerHTML=g.good.map(x=>`<span>${x}</span>`).join('');
+      $('.sp-see',el).href=`#bu-lu-${pad(k+1)}`;
+      dots.forEach((d,j)=>d.setAttribute('aria-current',j===k));
+      const d=dots[k];dotsBox.scrollTo({left:d.offsetLeft-dotsBox.clientWidth/2+d.clientWidth/2,behavior:reduce?'auto':'smooth'});
+    };
+    const greet=()=>later(()=>{if(spot===el&&!closing)say(fig,bx,GANG[ORDER[idx]].say,2600)},420);
+    const fly=(r,back)=>{
+      bx.getAnimations().forEach(a=>a.cancel());
+      if(reduce)return null;
+      const t=bx.getBoundingClientRect(),s=r.width/t.width;
+      const kf=[{transform:`translate(${r.left-t.left}px,${r.top-t.top}px) scale(${s})`},{transform:'none'}];
+      return bx.animate(back?kf.reverse():kf,{duration:back?460:700,easing:back?'cubic-bezier(.5,0,.3,1)':'cubic-bezier(.22,1.25,.4,1)',fill:'both'});
+    };
+
+    fill(idx);
+    document.body.appendChild(el);document.body.style.overflow='hidden';
+    const home=byN[ORDER[idx]],from=home.getBoundingClientRect();
+    home.classList.add('away');
+    fly(from,false);
+    requestAnimationFrame(()=>{el.classList.add('on');later(()=>txt.classList.add('show'),260);greet()});
+    $('.sp-close',el).focus({preventScroll:true});
+
+    const go=(k,dir)=>{
+      k=(k+L)%L;if(k===idx||busy||closing)return;busy=true;
+      if(bubble){bubble.remove();bubble=null}
+      txt.classList.remove('show');
+      const out=reduce?null:bx.animate([{transform:'none',opacity:1},{transform:`translateX(${-dir*16}%) rotate(${-dir*5}deg)`,opacity:0}],{duration:190,easing:'ease-in',fill:'forwards'});
+      const swap=()=>{
+        byN[ORDER[idx]].classList.remove('away');
+        idx=k;fill(k);byN[ORDER[k]].classList.add('away');
+        bx.getAnimations().forEach(a=>a.cancel());
+        if(!reduce)bx.animate([{transform:'translateY(-16%) scale(.9)',opacity:0},{transform:'translateY(2%) scale(1.04,.95)',opacity:1,offset:.62},{transform:'none',opacity:1}],{duration:480,easing:'cubic-bezier(.3,.9,.4,1)'});
+        requestAnimationFrame(()=>txt.classList.add('show'));
+        later(()=>{busy=false},260);greet();
+      };
+      out?out.finished.then(swap):swap();
+    };
+    const close=(instant)=>{
+      if(spot!==el||closing)return;closing=true;
+      if(bubble){bubble.remove();bubble=null}
+      removeEventListener('keydown',kd);
+      const b=byN[ORDER[idx]];
+      const done=()=>{el.remove();document.body.style.overflow='';b.classList.remove('away');spot=null;closing=false;if(!instant){hop(mv(b),true);b.focus({preventScroll:true})}};
+      if(instant){done();return}
+      txt.classList.remove('show');el.classList.remove('on');
+      const a=fly(b.getBoundingClientRect(),true);a?a.finished.then(done,done):done();
+    };
+    el._close=close;
+    $('.sp-close',el).addEventListener('click',()=>close());
+    $('.sp-prev',el).addEventListener('click',()=>go(idx-1,-1));
+    $('.sp-next',el).addEventListener('click',()=>go(idx+1,1));
+    dots.forEach(d=>d.addEventListener('click',()=>{const k=+d.dataset.i;go(k,k>idx?1:-1)}));
+    bx.addEventListener('click',()=>{hop(hp,true);if(!bubble)say(fig,bx,GANG[ORDER[idx]].say)});
+    $('.sp-see',el).addEventListener('click',()=>close(true));
+    const kd=e=>{if(e.key==='Escape')close();else if(e.key==='ArrowRight')go(idx+1,1);else if(e.key==='ArrowLeft')go(idx-1,-1)};
+    addEventListener('keydown',kd);
+    let sx=null,sy=0;const main=$('.sp-main',el);
+    main.addEventListener('touchstart',e=>{const t=e.touches[0];sx=t.clientX;sy=t.clientY},{passive:true});
+    main.addEventListener('touchend',e=>{if(sx===null)return;const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;sx=null;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.4)go(idx+(dx<0?1:-1),dx<0?1:-1)},{passive:true});
+  }
+
+  cleanup.push(()=>{alive=false;timers.forEach(clearTimeout);if(io)io.disconnect();removeEventListener('resize',rs);if(spot&&spot._close)spot._close(true);if(spot)spot.remove();document.body.style.overflow='';if(bubble)bubble.remove()});
 }
 
 function mountCase(){
