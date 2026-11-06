@@ -108,6 +108,11 @@ a:hover .arrow{transform:translateX(4px)}
 .mat{position:relative;aspect-ratio:4/5;background:var(--mat);overflow:hidden;display:flex;align-items:center;justify-content:center;padding:9%;transition:background-color .4s}
 .mat img{width:100%;height:100%;object-fit:contain;transition:transform .9s var(--ease)}
 .mat img.feather{-webkit-mask-image:radial-gradient(ellipse 70% 66% at 50% 52%,#000 62%,transparent 100%);mask-image:radial-gradient(ellipse 70% 66% at 50% 52%,#000 62%,transparent 100%);transform:scale(1.08)}
+.mat.uni{aspect-ratio:1;padding:0}
+.mat.uni img{object-fit:contain}
+.bulu-grid{max-width:1120px;margin-inline:auto}
+@media (max-width:899px){.bulu-grid{--n:3!important;grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.bulu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .tile:hover .mat img{transform:scale(1.04)}
 .tile:hover .mat img.feather{transform:scale(1.12)}
 .tile .cap{display:flex;justify-content:space-between;padding-top:10px;font-size:11.5px;letter-spacing:.14em;color:var(--soft)}
@@ -355,11 +360,13 @@ function matImg(n,{sizes='(max-width:899px) 46vw, 24vw',alt='',lazy=true}={}){
   const [w,h]=dim(n);
   return `<img class="${FEATHER.has(n)?'feather':''}" src="${src(n,'s')}" srcset="${src(n,'s')} ${isBu(n)?560:720}w, ${src(n,'l')} ${isBu(n)?1100:1800}w" sizes="${sizes}" width="${w}" height="${h}" ${lazy?'loading="lazy"':''} decoding="async" alt="${alt}">`;
 }
-function tile(s,n,{sizes,delay=0}={}){
+function tile(s,n,{sizes,delay=0,uni=false}={}){
   const i=s.items.indexOf(n);
   let img=matImg(n,{sizes,alt:`${s.name}, ${pad(i+1)} of ${s.items.length}`});
   if(s.wide)img=img.replace('class="feather"','class="zoom"');
-  return `<a class="tile rv" style="transition-delay:${delay}ms" href="#${caseId(s,i)}"><div class="mat${s.wide?' wide':''}">${img}</div></a>`;
+  /* uni: every character gets the same visual weight (equal area), so no one looks bigger than the rest */
+  if(uni){const [w,h]=dim(n),ar=w/h,H=Math.min(72/Math.sqrt(ar),82),W=Math.min(H*ar,82);img=img.replace('<img ',`<img style="height:${H.toFixed(1)}%;width:${W.toFixed(1)}%" `)}
+  return `<a class="tile rv" style="transition-delay:${delay}ms" href="#${caseId(s,i)}"><div class="mat${s.wide?' wide':''}${uni?' uni':''}">${img}</div></a>`;
 }
 
 /* ---------- shared bottom ---------- */
@@ -436,7 +443,7 @@ function buluView(s){
   <header class="s-head"><span class="tag soft kicker">Series</span><h1>${s.name}</h1><span class="tag soft">${pad(s.items.length)} friends</span><p class="g-lead soft">Fifteen little blue friends, each hugging the thing they love most. Pick one to say hi.</p></header>
   ${gangStage(s)}
   <div class="ch-head g-all"><h2 class="ch-title">All the drawings</h2><div class="ch-side"><span class="tag soft">${pad(s.items.length)} works</span></div></div>
-  <div class="tiles s-grid">${s.items.map((n,j)=>tile(s,n,{sizes:'(max-width:899px) 46vw, 31vw',delay:(j%3)*90})).join('')}</div>
+  <div class="tiles s-grid bulu-grid" style="--n:5">${s.items.map((n,j)=>tile(s,n,{sizes:'(max-width:899px) 46vw, 18vw',delay:(j%5)*70,uni:true})).join('')}</div>
   <a class="next" href="#${next.slug}"><span class="tag soft">Next series</span><b>${next.name} <span class="arrow">→</span></b></a>
 </div>
 ${bottom()}`;
